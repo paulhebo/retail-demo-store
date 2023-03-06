@@ -28,6 +28,7 @@ export default {
     HomeLink,
     ShopDropdown,
     Search,
+    Search,
     SupportLink,
     NavSeparator,
     CartLink,
