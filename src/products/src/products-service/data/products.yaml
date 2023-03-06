@@ -23772,3 +23772,19 @@
   - potato chips
   - potato crisps
   where_visible: Alexa
+- id: 9c1a2048-7aac-4565-b836-12345678
+  name: 蓝白色的足球运动鞋
+  category: outdoors
+  style: 足球运动鞋
+  description: 适合足球运动的足球鞋!
+  price: 20.1
+  image: 9c1a2048-7aac-4565-b836-12345678jpg
+  image_license: CC0
+  link: https://publicdomainpictures.net/en/view-image.php?image=16080&picture=football-boots
+  current_stock: 20
+  aliases:
+  - 运动鞋
+  - 球鞋
+  - 跑步鞋
+  - 足球鞋
+  where_visible: Alexa
