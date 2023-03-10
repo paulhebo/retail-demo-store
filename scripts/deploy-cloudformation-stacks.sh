@@ -86,6 +86,7 @@ aws cloudformation deploy \
   --parameter-overrides \
   ResourceBucket="${S3_BUCKET}" \
   SourceDeploymentType="CodeCommit" \
+  CreateOpenSearchServiceLinkedRole="No" \
   AlexaSkillId="" \
   AlexaAmazonPayDefaultSandboxEmail="" \
   ResourceBucketRelativePath="" \

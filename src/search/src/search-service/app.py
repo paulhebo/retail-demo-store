@@ -15,6 +15,7 @@ from opensearchpy import OpenSearch, NotFoundError
 import json
 import os
 import pprint
+import boto3
 
 INDEX_DOES_NOT_EXIST = 'index_not_found_exception'
 
@@ -111,17 +112,39 @@ def search_products():
         # To improve the diversity of hits across categories (particularly important when the search expression is
         # short/vague), the search is collapsed on the category keyword field. This ensures that the top hits are pulled
         # from all categories which are then aggregated into a unified response.
+
+        search_term = search_term.replace('的','')
+#        lambda_client = boto3.client('lambda')
+#        body={
+#            "httpMethod":"POST",
+#            "body":'{"inputs":"' + search_term + '"}',
+#            "headers":{"content-type":"application/json"},
+#            "queryStringParameters":{"endpoint_name":"pytorch-inference-2023-01-30-01-38-52-462"}
+#        }
+#        response = lambda_client.invoke(
+#                   FunctionName = 'all_in_one_ai_inference',
+#                   InvocationType = 'RequestResponse',
+#                   Payload = json.dumps(body)
+#        )
+
+#        payload = response["Payload"].read().decode("utf-8")
+#        payload = json.loads(payload)
+#        search_term_result = json.loads(payload['body'])
+        query_text = []
+#        for i in range(len(search_term_result['result'])):
+#            search_term = search_term_result['result'][i][0]
+#            query_text.append({ "match_bool_prefix" : { "name" : { "query": search_term, "analyzer":"ik_smart", "boost": 1.2 }}})
+#            query_text.append({ "match_bool_prefix" : { "description" : { "query": search_term, "analyzer":"ik_smart", "boost": 0.6 }}})
+
+        query_text.append({ "match_bool_prefix" : { "name" : { "query": search_term, "analyzer":"ik_smart", "boost": 1.2 }}})
+        query_text.append({ "match_bool_prefix" : { "description" : { "query": search_term, "analyzer":"ik_smart", "boost": 0.6 }}})
+
         results = search_client.search(index = INDEX_PRODUCTS, body={
             "from": offset,
             "size": size,
             "query": {
                 "dis_max" : {
-                    "queries" : [
-                        { "match_bool_prefix" : { "name" : { "query": search_term, "boost": 1.2 }}},
-                        { "match_bool_prefix" : { "category" : search_term }},
-                        { "match_bool_prefix" : { "style" : search_term }},
-                        { "match_bool_prefix" : { "description" : { "query": search_term, "boost": 0.6 }}}
-                    ],
+                    "queries" : query_text,
                     "tie_breaker" : 0.7
                 }
             },
