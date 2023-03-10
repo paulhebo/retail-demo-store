@@ -17,9 +17,15 @@ const connection = axios.create({
 const resource = "/search";
 
 export default {
-    searchProducts(val, size = 10, offset = 0) {
+    searchProducts(val, size = 10, offset = 0, index_server = 1) {
         if (!val || val.length == 0)
             throw "val required"
-        return connection.get(`${resource}/products?searchTerm=${val}&size=${size}&offset=${offset}`)
+	if (index_server == 2){
+	    return connection.get(`${resource}/products2?searchTerm=${val}&size=${size}&offset=${offset}`)
+	}else if(index_server == 3){
+	    return connection.get(`${resource}/products3?searchTerm=${val}&size=${size}&offset=${offset}`)
+	}else{
+            return connection.get(`${resource}/products?searchTerm=${val}&size=${size}&offset=${offset}`)
+	}
     },
 }

@@ -4,6 +4,8 @@
       <HomeLink class="logo"></HomeLink>
       <ShopDropdown class="shop mx-lg-2"></ShopDropdown>
       <Search class="search mx-lg-4"></Search>
+      <Search2 class="search2 mx-lg-4"></Search2>
+      <Search3 class="search3 mx-lg-4"></Search3>
       <UserDropdown class="user-dropdown"></UserDropdown>
       <NavSeparator class="d-none d-lg-block mx-2"></NavSeparator>
       <SupportLink class="support"></SupportLink>
@@ -17,6 +19,8 @@
 import HomeLink from './HomeLink/HomeLink';
 import ShopDropdown from './ShopDropdown/ShopDropdown';
 import Search from './Search/Search';
+import Search2 from './Search/Search2';
+import Search3 from './Search/Search3';
 import SupportLink from './SupportLink/SupportLink';
 import NavSeparator from './NavSeparator/NavSeparator';
 import CartLink from './CartLink/CartLink';
@@ -28,6 +32,8 @@ export default {
     HomeLink,
     ShopDropdown,
     Search,
+    Search2,
+    Search3,	  
     SupportLink,
     NavSeparator,
     CartLink,
@@ -54,6 +60,16 @@ export default {
 
 .search {
   grid-area: Search;
+  justify-self: end;
+}
+
+.search2 {
+  grid-area: Search2;
+  justify-self: end;
+}
+
+.search3 { 
+  grid-area: Search3;
   justify-self: end;
 }
 
@@ -96,5 +112,14 @@ export default {
   .search {
     flex: 1;
   }
+
+  .search2 {
+    flex: 1;
+  }
+
+  .search3 {
+    flex: 1;
+  }
+
 }
 </style>

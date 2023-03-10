@@ -29,9 +29,9 @@ set -e
 # 5. "skip_virtualenv" contains a boolean value to be used if stage.sh is called from inside a virtualenv 
 ########################################################################################################################################
 args=()
-private_s3=false
+private_s3=true
 only_cfn_template=false
-skip_generators=false
+skip_generators=true
 
 while [ "$1" ];
 do
@@ -146,7 +146,7 @@ if [ "$only_cfn_template" = false ]; then
             python3 -m venv .venv
             . .venv/bin/activate
         fi
-        pip install -r generators/requirements.txt
+        #pip install -r generators/requirements.txt
         PYTHONPATH=. python3 generators/generate_interactions_personalize.py
         PYTHONPATH=. python3 generators/generate_interactions_personalize_offers.py
     else
